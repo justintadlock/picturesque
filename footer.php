@@ -18,8 +18,6 @@
 ?>
 				<?php get_sidebar( 'primary' ); // Loads the sidebar-primary.php template. ?>
 
-				<?php get_sidebar( 'secondary' ); // Loads the sidebar-secondary.php template. ?>
-
 				<?php do_atomic( 'close_main' ); // picturesque_close_main ?>
 
 			</div><!-- .wrap -->
@@ -36,7 +34,9 @@
 
 			<div class="wrap">
 
-				<?php echo apply_atomic_shortcode( 'footer_content', hybrid_get_setting( 'footer_insert' ) ); ?>
+				<div class="footer-content">
+					<?php hybrid_footer_content(); ?>
+				</div>
 
 				<?php do_atomic( 'footer' ); // picturesque_footer ?>
 
