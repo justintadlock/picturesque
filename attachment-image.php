@@ -62,7 +62,7 @@ get_header(); // Loads the header.php template. ?>
 
 						<div class="attachment-meta">
 
-							<?php retro_fitted_image_info(); ?>
+							<?php picturesque_image_info(); ?>
 
 							<?php $gallery = do_shortcode( sprintf( '[gallery id="%1$s" exclude="%2$s" columns="5" numberposts="10" orderby="rand"]', $post->post_parent, get_the_ID() ) ); ?>
 
