@@ -2,8 +2,8 @@
 /**
  * Template Name: Gallery
  *
- * This is the default template.  It is used when a more specific template can't be found to display
- * posts.  It is unlikely that this template will ever be used, but there may be rare cases.
+ * This is the photoblogging template.  It displays a section with the latest images and a section with the 
+ * latest galleries ('image' and 'gallery' post formats).
  *
  * @package MyLife
  * @subpackage Template
