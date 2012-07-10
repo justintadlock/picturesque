@@ -11,8 +11,8 @@
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2011, Justin Tadlock
- * @link http://themehybrid.com/themes/my-life
+ * @copyright Copyright (c) 2012, Justin Tadlock
+ * @link http://themehybrid.com/themes/picturesque
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 ?>

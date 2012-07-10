@@ -8,8 +8,8 @@
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2011, Justin Tadlock
- * @link http://themehybrid.com/themes/my-life
+ * @copyright Copyright (c) 2012, Justin Tadlock
+ * @link http://themehybrid.com/themes/picturesque
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
@@ -19,18 +19,21 @@ do_atomic( 'before_entry' ); // picturesque_before_entry ?>
 
 	<?php do_atomic( 'open_entry' ); // picturesque_open_entry ?>
 
-	<?php if ( is_singular() ) { ?>
+	<?php if ( is_singular() && is_main_query() ) { ?>
 
-		<?php echo apply_atomic_shortcode( 'entry_title', the_title( '<h1 class="entry-title">', '</h1>', false ) ); ?>
-
-		<?php echo apply_atomic_shortcode( 'byline', '<div class="byline">' . __( 'Published by [entry-author] on [entry-published] [entry-comments-link before=" | "] [entry-edit-link before=" | "]', 'my-life' ) . '</div>' ); ?>
+		<header class="entry-header">
+			<?php echo apply_atomic_shortcode( 'entry_title', the_title( '<h1 class="entry-title">', '</h1>', false ) ); ?>
+			<?php echo apply_atomic_shortcode( 'byline', '<div class="byline">' . __( 'Published by [entry-author] on [entry-published] [entry-comments-link before=" | "] [entry-edit-link before=" | "]', 'picturesque' ) . '</div>' ); ?>
+		</header><!-- .entry-header -->
 
 		<div class="entry-content">
 			<?php the_content(); ?>
-			<?php wp_link_pages( array( 'before' => '<p class="page-links">' . __( 'Pages:', 'my-life' ), 'after' => '</p>' ) ); ?>
+			<?php wp_link_pages( array( 'before' => '<p class="page-links">' . __( 'Pages:', 'picturesque' ), 'after' => '</p>' ) ); ?>
 		</div><!-- .entry-content -->
 
-		<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">' . __( '[entry-terms taxonomy="category" before="Posted in "] [entry-terms before="Tagged "]', 'my-life' ) . '</div>' ); ?>
+		<footer class="entry-footer">
+			<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">' . __( '[entry-terms taxonomy="category" before="Posted in "] [entry-terms before="Tagged "]', 'picturesque' ) . '</div>' ); ?>
+		</footer><!-- .entry-footer -->
 
 	<?php } else { ?>
 
@@ -38,17 +41,16 @@ do_atomic( 'before_entry' ); // picturesque_before_entry ?>
 
 		<header class="entry-header">
 			<?php echo apply_atomic_shortcode( 'entry_title', '[entry-title]' ); ?>
-
-			<?php echo apply_atomic_shortcode( 'byline', '<div class="byline">' . __( 'Published by [entry-author] on [entry-published] [entry-comments-link before=" | "] [entry-edit-link before=" | "]', 'my-life' ) . '</div>' ); ?>
+			<?php echo apply_atomic_shortcode( 'byline', '<div class="byline">' . __( 'Published by [entry-author] on [entry-published] [entry-comments-link before=" | "] [entry-edit-link before=" | "]', 'picturesque' ) . '</div>' ); ?>
 		</header><!-- .entry-header -->
 
 		<div class="entry-summary">
 			<?php the_excerpt(); ?>
-			<?php wp_link_pages( array( 'before' => '<p class="page-links">' . __( 'Pages:', 'my-life' ), 'after' => '</p>' ) ); ?>
+			<?php wp_link_pages( array( 'before' => '<p class="page-links">' . __( 'Pages:', 'picturesque' ), 'after' => '</p>' ) ); ?>
 		</div><!-- .entry-summary -->
 
 		<footer class="entry-footer">
-			<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">' . __( '[entry-terms taxonomy="category" before="Posted in "] [entry-terms before="Tagged "]', 'my-life' ) . '</div>' ); ?>
+			<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">' . __( '[entry-terms taxonomy="category" before="Posted in "] [entry-terms before="Tagged "]', 'picturesque' ) . '</div>' ); ?>
 		</footer><!-- .entry-footer -->
 
 	<?php } ?>

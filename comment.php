@@ -10,8 +10,8 @@
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2011, Justin Tadlock
- * @link http://themehybrid.com/themes/my-life
+ * @copyright Copyright (c) 2012, Justin Tadlock
+ * @link http://themehybrid.com/themes/picturesque
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
@@ -32,7 +32,7 @@
 
 			<div class="comment-content comment-text">
 				<?php if ( '0' == $comment->comment_approved ) : ?>
-					<?php echo apply_atomic_shortcode( 'comment_moderation', '<p class="alert moderation">' . __( 'Your comment is awaiting moderation.', 'my-life' ) . '</p>' ); ?>
+					<?php echo apply_atomic_shortcode( 'comment_moderation', '<p class="alert moderation">' . __( 'Your comment is awaiting moderation.', 'picturesque' ) . '</p>' ); ?>
 				<?php endif; ?>
 
 				<?php comment_text( $comment->comment_ID ); ?>

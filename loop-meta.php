@@ -9,8 +9,8 @@
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2011, Justin Tadlock
- * @link http://themehybrid.com/themes/my-life
+ * @copyright Copyright (c) 2012, Justin Tadlock
+ * @link http://themehybrid.com/themes/picturesque
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 ?>
@@ -85,7 +85,7 @@
 
 			<div class="loop-description">
 				<p>
-				<?php printf( __( 'You are browsing the search results for "%s"', 'my-life' ), esc_attr( get_search_query() ) ); ?>
+				<?php printf( __( 'You are browsing the search results for "%s"', 'picturesque' ), esc_attr( get_search_query() ) ); ?>
 				</p>
 			</div><!-- .loop-description -->
 
@@ -94,11 +94,11 @@
 	<?php elseif ( is_date() ) : ?>
 
 		<div class="loop-meta">
-			<h1 class="loop-title"><?php _e( 'Archives by date', 'my-life' ); ?></h1>
+			<h1 class="loop-title"><?php _e( 'Archives by date', 'picturesque' ); ?></h1>
 
 			<div class="loop-description">
 				<p>
-				<?php _e( 'You are browsing the site archives by date.', 'my-life' ); ?>
+				<?php _e( 'You are browsing the site archives by date.', 'picturesque' ); ?>
 				</p>
 			</div><!-- .loop-description -->
 
@@ -122,11 +122,11 @@
 
 		<div class="loop-meta">
 
-			<h1 class="loop-title"><?php _e( 'Archives', 'my-life' ); ?></h1>
+			<h1 class="loop-title"><?php _e( 'Archives', 'picturesque' ); ?></h1>
 
 			<div class="loop-description">
 				<p>
-				<?php _e( 'You are browsing the site archives.', 'my-life' ); ?>
+				<?php _e( 'You are browsing the site archives.', 'picturesque' ); ?>
 				</p>
 			</div><!-- .loop-description -->
 

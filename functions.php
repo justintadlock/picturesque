@@ -9,8 +9,8 @@
  * override parent theme features.  Use a priority of 9 if wanting to run before the parent theme.
  *
  * This program is free software; you can redistribute it and/or modify it under the terms of the GNU 
- * General Public License version 2, as published by the Free Software Foundation.  You may NOT assume 
- * that you can use any other version of the GPL.
+ * General Public License as published by the Free Software Foundation; either version 2 of the License, 
+ * or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -23,13 +23,13 @@
  * @version 0.1.0
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2011, Justin Tadlock
- * @link http://themehybrid.com/themes/my-life
+ * @copyright Copyright (c) 2012, Justin Tadlock
+ * @link http://themehybrid.com/themes/picturesque
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
 /* Load the core theme framework. */
-require_once( trailingslashit( TEMPLATEPATH ) . 'library/hybrid.php' );
+require_once( trailingslashit( get_template_directory() ) . 'library/hybrid.php' );
 new Hybrid();
 
 /* Do theme setup on the 'after_setup_theme' hook. */
@@ -48,7 +48,7 @@ function picturesque_theme_setup() {
 
 	/* Add theme support for core framework features. */
 	add_theme_support( 'hybrid-core-menus', array( 'primary', 'subsidiary' ) );
-	add_theme_support( 'hybrid-core-sidebars', array( 'primary', 'subsidiary' ) );
+	add_theme_support( 'hybrid-core-sidebars', array( 'primary' ) );
 	add_theme_support( 'hybrid-core-widgets' );
 	add_theme_support( 'hybrid-core-shortcodes' );
 	add_theme_support( 'hybrid-core-theme-settings', array( 'about', 'footer' ) );
@@ -64,31 +64,38 @@ function picturesque_theme_setup() {
 	add_theme_support( 'get-the-image' );
 	add_theme_support( 'breadcrumb-trail' );
 	add_theme_support( 'cleaner-gallery' );
-	add_theme_support( 'cleaner-caption' );
 
 	/* Add theme support for WordPress features. */
 	add_theme_support( 'automatic-feed-links' );
 	add_theme_support( 'post-formats', array( 'image', 'gallery' ) );
-	add_custom_background( 'picturesque_custom_background_callback' );
 
-	/**
-	 * Add support for WordPress custom header image.  On that note, this is horrible and messy.  Expect a 
-	 * rewrite of this entire code into something more beautiful in future versions.
-	 */
-	add_custom_image_header( '__return_false', '__return_false' );
-	define( 'NO_HEADER_TEXT', true );
-	define( 'HEADER_IMAGE', 'remove-header' ); // Setting the default to 'remove-header' instead of empty string.
-	define( 'HEADER_IMAGE_WIDTH', 1050 );
-	define( 'HEADER_IMAGE_HEIGHT', 200 );
+	/* Add support for WordPress custom background. */
+	add_theme_support( 
+		'custom-background',
+		array(
+			'default-image' => trailingslashit( get_template_directory_uri() ) . 'images/bg.png',
+			'wp-head-callback' => 'picturesque_custom_background_callback'
+		)
+	);
+
+	/* Add support for WordPress custom header image. */
+	add_theme_support(
+		'custom-header',
+		array(
+			'wp-head-callback' => '__return_false',
+			'admin-head-callback' => '__return_false',
+			'header-text' => false,
+			'default-image' => 'remove-header',
+			'width' => 1050,
+			'height' => 200
+		)
+	);
 
 	/* Embed width/height defaults. */
 	add_filter( 'embed_defaults', 'picturesque_embed_defaults' );
 
 	/* Set content width. */
 	hybrid_set_content_width( 600 );
-
-	/* Filter the [wp-caption] width. */
-	add_filter( 'cleaner_caption_args', 'picturesque_caption_args' );
 
 	/* Filter the sidebar widgets. */
 	add_filter( 'sidebars_widgets', 'picturesque_disable_sidebars' );
@@ -98,36 +105,14 @@ function picturesque_theme_setup() {
 	add_filter( 'previous_comments_link_attributes', 'picturesque_previous_comments_link_attributes' );
 	add_filter( 'next_comments_link_attributes', 'picturesque_next_comments_link_attributes' );
 
-	/* Add custom image sizes. */
-	add_action( 'init', 'picturesque_add_image_sizes' );
-
 	/* Wraps <blockquote> around quote posts. */
 	add_filter( 'the_content', 'picturesque_quote_content' );
 
 	/* Adds the featured image to image posts if no content is found. */
 	add_filter( 'the_content', 'picturesque_image_content' );
 
-	/* Add custom <body> classes. */
-	add_filter( 'body_class', 'picturesque_body_class' );
-
-	/* Filter the header image on singular views. */
-	add_filter( 'theme_mod_header_image', 'picturesque_header_image' );
-
-	/* Registers custom shortcodes. */
-	add_action( 'init', 'picturesque_register_shortcodes' );
-
-	/* Simplifies the taxonomy template name for post formats. */
-	add_filter( 'taxonomy_template', 'picturesque_taxonomy_template' );
-
 	/* Filters the image/gallery post format archive galleries. */
 	add_filter( "{$prefix}_post_format_archive_gallery_columns", 'picturesque_archive_gallery_columns' );
-}
-
-function picturesque_caption_args( $args ) {
-
-	$args['width'] = intval( $args['width'] ) + 10;
-
-	return $args;
 }
 
 /**
@@ -147,46 +132,13 @@ function picturesque_archive_gallery_columns( $columns ) {
 		$layout = theme_layouts_get_layout();
 
 		if ( 'layout-1c' == $layout )
-			$columns = 4;
+			$columns = 5;
 
 		elseif ( in_array( $layout, array( 'layout-3c-l', 'layout-3c-r', 'layout-3c-c' ) ) )
 			$columns = 2;
 	}
 
 	return $columns;
-}
-
-/**
- * Filter for the "theme_mod_header_image" hook, which returns the header image URL.  This allows the user 
- * to change the header image on a per-post basis by uploading a feature image large enough to display as a
- * header image.
- *
- * @since 0.1.0
- * @param string $url The URL of the current header image.
- * @return string $url
- */
-function picturesque_header_image( $url ) {
-
-	if ( is_singular() && 'remove-header' !== $url ) {
-
-		$post_id = get_queried_object_id();
-
-		if ( is_attachment() && wp_attachment_is_image( $post_id ) )
-			$thumbnail_id = $post_id;
-
-		elseif ( has_post_thumbnail( $post_id ) )
-			$thumbnail_id = get_post_thumbnail_id( $post_id );
-
-		if ( !empty( $thumbnail_id ) ) {
-
-			$image = wp_get_attachment_image_src( $thumbnail_id, 'header' );
-
-			if ( $image[1] >= HEADER_IMAGE_WIDTH && $image[2] >= HEADER_IMAGE_HEIGHT )
-				$url = $image[0];
-		}
-	}
-
-	return $url;
 }
 
 /**
@@ -249,15 +201,6 @@ function picturesque_url_grabber() {
 }
 
 /**
- * Adds custom image sizes for featured images.  The 'feature' image size is used for sticky posts.
- *
- * @since 0.1.0
- */
-function picturesque_add_image_sizes() {
-	add_image_size( 'header', 1000, 200, true );
-}
-
-/**
  * Function for deciding which pages should have a one-column layout.
  *
  * @since 0.1.0
@@ -290,7 +233,6 @@ function picturesque_theme_layout_one_column( $layout ) {
  * @return array $sidebars_widgets
  */
 function picturesque_disable_sidebars( $sidebars_widgets ) {
-	global $wp_query;
 
 	if ( current_theme_supports( 'theme-layouts' ) && !is_admin() ) {
 
@@ -312,16 +254,14 @@ function picturesque_disable_sidebars( $sidebars_widgets ) {
  */
 function picturesque_embed_defaults( $args ) {
 
-	$args['width'] = 600;
+	$args['width'] = hybrid_get_content_width();
 
 	if ( current_theme_supports( 'theme-layouts' ) ) {
 
 		$layout = theme_layouts_get_layout();
 
-		if ( 'layout-3c-l' == $layout || 'layout-3c-r' == $layout || 'layout-3c-c' == $layout )
-			$args['width'] = 470;
-		elseif ( 'layout-1c' == $layout )
-			$args['width'] = 808;
+		if ( 'layout-1c' == $layout )
+			$args['width'] = 950;
 	}
 
 	return $args;
@@ -429,103 +369,6 @@ function picturesque_custom_background_callback() {
 
 }
 
-/** ====== Hybrid Core 1.3.0 functionality. ====== **/
-
-/**
- * Fix for Hybrid Core until version 1.3.0 is released.  This adds the '.custom-background' class to the <body> 
- * element for the WordPress custom background feature.
- *
- * @since 0.1.0
- * @todo Remove once theme is upgraded to Hybrid Core 1.3.0.
- * @link http://core.trac.wordpress.org/ticket/18698
- */
-function picturesque_body_class( $classes ) {
-
-	if ( get_background_image() || get_background_color() )
-		$classes[] = 'custom-background';
-
-	if ( is_tax( 'post_format' ) )
-		$classes = array_map( 'picturesque_clean_post_format_slug', $classes );
-
-	return $classes;
-}
-
-/**
- * Removes 'post-format-' from the taxonomy template name for post formats.
- *
- * @since 0.1.0
- * @todo Remove once theme is upgraded to Hybrid Core 1.3.0.
- */
-function picturesque_taxonomy_template( $template ) {
-
-	$term = get_queried_object();
-
-	if ( 'post_format' == $term->taxonomy ) {
-
-		$slug = picturesque_clean_post_format_slug( $term->slug );
-
-		$has_template = locate_template( array( "taxonomy-{$term->taxonomy}-{$slug}.php" ) );
-
-		if ( $has_template )
-			$template = $has_template;
-	}
-
-	return $template;
-}
-
-/**
- * Add functionality to Hybrid Core 1.3.0.
- *
- * @since 0.1.0
- * @todo Remove once theme is upgraded to Hybrid Core 1.3.0.
- */
-function picturesque_clean_post_format_slug( $slug ) {
-	return str_replace( 'post-format-', '', $slug );
-}
-
-/**
- * Registers the [post-format-link] and [entry-permalink] shortcodes.
- *
- * @since 0.1.0
- * @todo Remove once theme is upgraded to Hybrid Core 1.3.0.
- */
-function picturesque_register_shortcodes() {
-	add_shortcode( 'post-format-link', 'picturesque_post_format_link_shortcode' );
-	add_shortcode( 'entry-permalink', 'picturesque_entry_permalink_shortcode' );
-}
-
-/**
- * Returns the output of the [post-format-link] shortcode.
- *
- * @since 0.1.0
- * @todo Remove once theme is upgraded to Hybrid Core 1.3.0.
- * @param array $attr The shortcode arguments.
- * @return string A link to the post format archive.
- */
-function picturesque_post_format_link_shortcode( $attr ) {
-
-	$attr = shortcode_atts( array( 'before' => '', 'after' => '' ), $attr );
-	$format = get_post_format();
-	$url = ( empty( $format ) ? get_permalink() : get_post_format_link( $format ) );
-
-	return $attr['before'] . '<a href="' . esc_url( $url ) . '" class="post-format-link">' . get_post_format_string( $format ) . '</a>' . $attr['after'];
-}
-
-/**
- * Returns the output of the [entry-permalink] shortcode.
- *
- * @since 0.1.0
- * @todo Remove once theme is upgraded to Hybrid Core 1.3.0.
- * @param array $attr The shortcode arguments.
- * @return string A permalink back to the post.
- */
-function picturesque_entry_permalink_shortcode( $attr ) {
-
-	$attr = shortcode_atts( array( 'before' => '', 'after' => '' ), $attr );
-
-	return $attr['before'] . '<a href="' . esc_url( get_permalink() ) . '" class="permalink">' . __( 'Permalink', 'my-life' ) . '</a>' . $attr['after'];
-}
-
 /**
  * Displays an attachment image's metadata and exif data while viewing a singular attachment page.
  *
@@ -535,7 +378,7 @@ function picturesque_entry_permalink_shortcode( $attr ) {
  *
  * @since 0.1.0
  */
-function retro_fitted_image_info() {
+function picturesque_image_info() {
 
 	/* Set up some default variables and get the image metadata. */
 	$meta = wp_get_attachment_metadata( get_the_ID() );
@@ -543,27 +386,27 @@ function retro_fitted_image_info() {
 	$list = '';
 
 	/* Add the width/height to the $items array. */
-	$items['dimensions'] = sprintf( __( '<span class="prep">Dimensions:</span> %s', hybrid_get_textdomain() ), '<span class="image-data"><a href="' . esc_url( wp_get_attachment_url() ) . '">' . sprintf( __( '%1$s &#215; %2$s pixels', hybrid_get_textdomain() ), $meta['width'], $meta['height'] ) . '</a></span>' );
+	$items['dimensions'] = sprintf( __( '<span class="prep">Dimensions:</span> %s', 'picturesque' ), '<span class="image-data"><a href="' . esc_url( wp_get_attachment_url() ) . '">' . sprintf( __( '%1$s &#215; %2$s pixels', 'picturesque' ), $meta['width'], $meta['height'] ) . '</a></span>' );
 
 	/* If a timestamp exists, add it to the $items array. */
 	if ( !empty( $meta['image_meta']['created_timestamp'] ) )
-		$items['created_timestamp'] = sprintf( __( '<span class="prep">Date:</span> %s', hybrid_get_textdomain() ), '<span class="image-data">' . date( get_option( 'date_format' ), $meta['image_meta']['created_timestamp'] ) . '</span>' );
+		$items['created_timestamp'] = sprintf( __( '<span class="prep">Date:</span> %s', 'picturesque' ), '<span class="image-data">' . date( get_option( 'date_format' ), $meta['image_meta']['created_timestamp'] ) . '</span>' );
 
 	/* If a camera exists, add it to the $items array. */
 	if ( !empty( $meta['image_meta']['camera'] ) )
-		$items['camera'] = sprintf( __( '<span class="prep">Camera:</span> %s', hybrid_get_textdomain() ), '<span class="image-data">' . $meta['image_meta']['camera'] . '</span>' );
+		$items['camera'] = sprintf( __( '<span class="prep">Camera:</span> %s', 'picturesque' ), '<span class="image-data">' . $meta['image_meta']['camera'] . '</span>' );
 
 	/* If an aperture exists, add it to the $items array. */
 	if ( !empty( $meta['image_meta']['aperture'] ) )
-		$items['aperture'] = sprintf( __( '<span class="prep">Aperture:</span> %s', hybrid_get_textdomain() ), '<span class="image-data">' . sprintf( __( 'f/%s', hybrid_get_textdomain() ), $meta['image_meta']['aperture'] ) . '</span>' );
+		$items['aperture'] = sprintf( __( '<span class="prep">Aperture:</span> %s', 'picturesque' ), '<span class="image-data">' . sprintf( __( 'f/%s', 'picturesque' ), $meta['image_meta']['aperture'] ) . '</span>' );
 
 	/* If a focal length is set, add it to the $items array. */
 	if ( !empty( $meta['image_meta']['focal_length'] ) )
-		$items['focal_length'] = sprintf( __( '<span class="prep">Focal Length:</span> %s', hybrid_get_textdomain() ), '<span class="image-data">' . sprintf( __( '%s mm', hybrid_get_textdomain() ), $meta['image_meta']['focal_length'] ) . '</span>' );
+		$items['focal_length'] = sprintf( __( '<span class="prep">Focal Length:</span> %s', 'picturesque' ), '<span class="image-data">' . sprintf( __( '%s mm', 'picturesque' ), $meta['image_meta']['focal_length'] ) . '</span>' );
 
 	/* If an ISO is set, add it to the $items array. */
 	if ( !empty( $meta['image_meta']['iso'] ) )
-		$items['iso'] = sprintf( __( '<span class="prep">ISO:</span> %s', hybrid_get_textdomain() ), '<span class="image-data">' . $meta['image_meta']['iso'] . '</span>' );
+		$items['iso'] = sprintf( __( '<span class="prep">ISO:</span> %s', 'picturesque' ), '<span class="image-data">' . $meta['image_meta']['iso'] . '</span>' );
 
 	/* If a shutter speed is given, format the float into a fraction and add it to the $items array. */
 	if ( !empty( $meta['image_meta']['shutter_speed'] ) ) {
@@ -579,7 +422,7 @@ function retro_fitted_image_info() {
 			$shutter_speed = $meta['image_meta']['shutter_speed'];
 		}
 
-		$items['shutter_speed'] = sprintf( __( '<span class="prep">Shutter Speed:</span> %s', hybrid_get_textdomain() ), '<span class="image-data">' . sprintf( __( '%s sec', hybrid_get_textdomain() ), $shutter_speed ) . '</span>' );
+		$items['shutter_speed'] = sprintf( __( '<span class="prep">Shutter Speed:</span> %s', 'picturesque' ), '<span class="image-data">' . sprintf( __( '%s sec', 'picturesque' ), $shutter_speed ) . '</span>' );
 	}
 
 	/* Allow devs to overwrite the array of items. */
@@ -590,7 +433,7 @@ function retro_fitted_image_info() {
 		$list .= "<li>{$item}</li>";
 
 	/* Format the HTML output of the function. */
-	$output = '<div class="image-info"><h3>' . __( 'Image Info', hybrid_get_textdomain() ) . '</h3><ul>' . $list . '</ul></div>';
+	$output = '<div class="image-info"><h3>' . __( 'Image Info', 'picturesque' ) . '</h3><ul>' . $list . '</ul></div>';
 
 	/* Display the image info and allow devs to overwrite the final output. */
 	echo apply_atomic( 'image_info', $output );

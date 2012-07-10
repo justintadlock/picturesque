@@ -9,8 +9,8 @@
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2011, Justin Tadlock
- * @link http://themehybrid.com/themes/my-life
+ * @copyright Copyright (c) 2012, Justin Tadlock
+ * @link http://themehybrid.com/themes/picturesque
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
@@ -30,13 +30,14 @@ get_header(); // Loads the header.php template. ?>
 
 					<?php do_atomic( 'before_entry' ); // picturesque_before_entry ?>
 
-					<div id="post-<?php the_ID(); ?>" class="<?php hybrid_entry_class(); ?>">
+					<article id="post-<?php the_ID(); ?>" class="<?php hybrid_entry_class(); ?>">
 
 						<?php do_atomic( 'open_entry' ); // picturesque_open_entry ?>
 
-						<?php echo apply_atomic_shortcode( 'entry_title', the_title( '<h1 class="entry-title">', '</h1>', false ) ); ?>
-
-						<?php echo apply_atomic_shortcode( 'byline', '<div class="byline">' . sprintf( __( 'Sizes: %s', 'my-life' ), picturesque_get_image_size_links() ) . '</div>' ); ?>
+						<header class="entry-header">
+							<?php echo apply_atomic_shortcode( 'entry_title', the_title( '<h1 class="entry-title">', '</h1>', false ) ); ?>
+							<?php echo apply_atomic_shortcode( 'byline', '<div class="byline">' . sprintf( __( 'Sizes: %s', 'picturesque' ), picturesque_get_image_size_links() ) . '</div>' ); ?>
+						</header><!-- .entry-header -->
 
 						<div class="entry-content">
 
@@ -47,35 +48,31 @@ get_header(); // Loads the header.php template. ?>
 								echo wp_get_attachment_image( get_the_ID(), 'full', false, array( 'class' => 'aligncenter' ) );
 							} ?>
 
-							<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'my-life' ) ); ?>
-							<?php wp_link_pages( array( 'before' => '<p class="page-links">' . __( 'Pages:', 'my-life' ), 'after' => '</p>' ) ); ?>
-
+							<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'picturesque' ) ); ?>
+							<?php wp_link_pages( array( 'before' => '<p class="page-links">' . __( 'Pages:', 'picturesque' ), 'after' => '</p>' ) ); ?>
 
 						</div><!-- .entry-content -->
 
 						<?php do_atomic( 'close_entry' ); // picturesque_close_entry ?>
 
-					</div><!-- .hentry -->
+					</article><!-- .hentry -->
 
 					<?php do_atomic( 'after_entry' ); // picturesque_after_entry ?>
-					<?php if ( wp_attachment_is_image( get_the_ID() ) ) { // Only show attachment meta for images for now. ?>
 
-						<div class="attachment-meta">
+					<div class="attachment-meta">
 
-							<?php picturesque_image_info(); ?>
+						<?php picturesque_image_info(); ?>
 
-							<?php $gallery = do_shortcode( sprintf( '[gallery id="%1$s" exclude="%2$s" columns="5" numberposts="10" orderby="rand"]', $post->post_parent, get_the_ID() ) ); ?>
+						<?php $gallery = do_shortcode( sprintf( '[gallery id="%1$s" exclude="%2$s" columns="5" numberposts="10" orderby="rand"]', $post->post_parent, get_the_ID() ) ); ?>
 
-							<?php if ( !empty( $gallery ) ) { ?>
-								<div class="image-gallery">
-									<h3><?php _e( 'Gallery', 'picturesque' ); ?></h3>
-									<?php echo $gallery; ?>
-								</div>
-							<?php } ?>
+						<?php if ( !empty( $gallery ) ) { ?>
+							<div class="image-gallery">
+								<h3><?php _e( 'Gallery', 'picturesque' ); ?></h3>
+								<?php echo $gallery; ?>
+							</div>
+						<?php } ?>
 
-						</div><!-- .attachment-meta -->
-
-					<?php } ?>
+					</div><!-- .attachment-meta -->
 
 					<?php do_atomic( 'after_singular' ); // picturesque_after_singular ?>
 

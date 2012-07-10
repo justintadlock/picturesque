@@ -8,8 +8,8 @@
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2011, Justin Tadlock
- * @link http://themehybrid.com/themes/my-life
+ * @copyright Copyright (c) 2012, Justin Tadlock
+ * @link http://themehybrid.com/themes/picturesque
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
@@ -17,7 +17,7 @@ if ( has_nav_menu( 'subsidiary' ) ) : ?>
 
 	<?php do_atomic( 'before_menu_subsidiary' ); // picturesque_before_menu_subsidiary ?>
 
-	<div id="menu-subsidiary" class="menu-container">
+	<nav id="menu-subsidiary" class="menu-container">
 
 		<div class="wrap">
 
@@ -29,7 +29,7 @@ if ( has_nav_menu( 'subsidiary' ) ) : ?>
 
 		</div>
 
-	</div><!-- #menu-subsidiary .menu-container -->
+	</nav><!-- #menu-subsidiary .menu-container -->
 
 	<?php do_atomic( 'after_menu_subsidiary' ); // picturesque_after_menu_subsidiary ?>
 

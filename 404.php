@@ -9,8 +9,8 @@
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2011, Justin Tadlock
- * @link http://themehybrid.com/themes/my-life
+ * @copyright Copyright (c) 2012, Justin Tadlock
+ * @link http://themehybrid.com/themes/picturesque
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
@@ -26,17 +26,19 @@ get_header(); // Loads the header.php template. ?>
 
 		<div class="hfeed">
 
-			<div id="post-0" class="<?php hybrid_entry_class(); ?>">
+			<article id="post-0" class="<?php hybrid_entry_class(); ?>">
 
-				<h1 class="error-404-title entry-title"><?php _e( 'Whoah! You broke something!', 'my-life' ); ?></h1>
+				<header class="entry-header">
+					<h1 class="error-404-title entry-title"><?php _e( 'Whoah! You broke something!', 'picturesque' ); ?></h1>
+				</header><!-- .entry-header -->
 
 				<div class="entry-content">
 
 					<p>
-						<?php printf( __( "Just kidding! You tried going to %s, which doesn't exist, so that means I probably broke something.", 'my-life' ), '<code>' . home_url( esc_url( $_SERVER['REQUEST_URI'] ) ) . '</code>' ); ?>
+						<?php printf( __( "Just kidding! You tried going to %s, which doesn't exist, so that means I probably broke something.", 'picturesque' ), '<code>' . home_url( esc_url( $_SERVER['REQUEST_URI'] ) ) . '</code>' ); ?>
 					</p>
 					<p>
-						<?php _e( "The following is a list of the latest posts from the blog. Maybe it will help you find what you're looking for.", 'my-life' ); ?>
+						<?php _e( "The following is a list of the latest posts from the blog. Maybe it will help you find what you're looking for.", 'picturesque' ); ?>
 					</p>
 
 					<ul>
@@ -45,7 +47,7 @@ get_header(); // Loads the header.php template. ?>
 
 				</div><!-- .entry-content -->
 
-			</div><!-- .hentry -->
+			</article><!-- .hentry -->
 
 		</div><!-- .hfeed -->
 

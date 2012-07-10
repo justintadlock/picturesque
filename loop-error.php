@@ -8,8 +8,8 @@
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2011, Justin Tadlock
- * @link http://themehybrid.com/themes/my-life
+ * @copyright Copyright (c) 2012, Justin Tadlock
+ * @link http://themehybrid.com/themes/picturesque
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 ?>
@@ -17,7 +17,7 @@
 
 		<div class="entry-content">
 
-			<p><?php _e( 'Apologies, but no entries were found.', 'my-life' ); ?></p>
+			<p><?php _e( 'Apologies, but no entries were found.', 'picturesque' ); ?></p>
 
 		</div><!-- .entry-content -->
 

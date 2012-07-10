@@ -9,8 +9,8 @@
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2011, Justin Tadlock
- * @link http://themehybrid.com/themes/my-life
+ * @copyright Copyright (c) 2012, Justin Tadlock
+ * @link http://themehybrid.com/themes/picturesque
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
@@ -32,21 +32,25 @@ get_header(); // Loads the header.php template. ?>
 
 					<?php do_atomic( 'before_entry' ); // picturesque_before_entry ?>
 
-					<div id="post-<?php the_ID(); ?>" class="<?php hybrid_entry_class(); ?>">
+					<article id="post-<?php the_ID(); ?>" class="<?php hybrid_entry_class(); ?>">
 
 						<?php do_atomic( 'open_entry' ); // picturesque_open_entry ?>
 
-						<?php echo apply_atomic_shortcode( 'entry_title', '[entry-title]' ); ?>
+						<header class="entry-header">
+							<?php echo apply_atomic_shortcode( 'entry_title', '[entry-title]' ); ?>
+						</header><!-- .entry-header -->
 
 						<div class="entry-summary">
 							<?php the_excerpt(); ?>
 						</div><!-- .entry-summary -->
 
-						<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">' . sprintf( __( '[entry-published] &mdash; <code>%s</code>', 'my-life' ), get_permalink() ) . '</div>' ); ?>
+						<footer class="entry-footer">
+							<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">' . sprintf( __( '[entry-published] &mdash; <code>%s</code>', 'picturesque' ), get_permalink() ) . '</div>' ); ?>
+						</footer><!-- .entry-footer -->
 
 						<?php do_atomic( 'close_entry' ); // picturesque_close_entry ?>
 
-					</div><!-- .hentry -->
+					</article><!-- .hentry -->
 
 					<?php do_atomic( 'after_entry' ); // picturesque_after_entry ?>
 
