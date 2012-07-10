@@ -43,7 +43,7 @@ get_header(); // Loads the header.php template. ?>
 
 							<?php if ( has_excerpt() ) {
 								$src = wp_get_attachment_image_src( get_the_ID(), 'full' );
-								echo do_shortcode( '[caption align="aligncenter" width="' . esc_attr( $src[1] ) . '" caption="' . get_the_excerpt() . '"]' . wp_get_attachment_image( get_the_ID(), 'full', false ) . '[/caption]' );
+								echo do_shortcode( sprintf( '[caption align="aligncenter" width="%1$s"]%3$s %2$s[/caption]', esc_attr( $src[1] ), get_the_excerpt(), wp_get_attachment_image( get_the_ID(), 'full', false ) ) );
 							} else {
 								echo wp_get_attachment_image( get_the_ID(), 'full', false, array( 'class' => 'aligncenter' ) );
 							} ?>
