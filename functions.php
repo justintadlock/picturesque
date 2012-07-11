@@ -133,9 +133,6 @@ function picturesque_archive_gallery_columns( $columns ) {
 
 		if ( 'layout-1c' == $layout )
 			$columns = 5;
-
-		elseif ( in_array( $layout, array( 'layout-3c-l', 'layout-3c-r', 'layout-3c-c' ) ) )
-			$columns = 2;
 	}
 
 	return $columns;
@@ -178,26 +175,6 @@ function picturesque_image_content( $content ) {
 	}
 
 	return $content;
-}
-
-/**
- * Grabs the first URL from the post content of the current post.  This is meant to be used with the link post 
- * format to easily find the link for the post. 
- *
- * @since 0.1.0
- * @return string The link if found.  Otherwise, the permalink to the post.
- *
- * @note This is a modified version of the twentyeleven_url_grabber() function in the TwentyEleven theme.
- * @author wordpressdotorg
- * @copyright Copyright (c) 2011, wordpressdotorg
- * @link http://wordpress.org/extend/themes/twentyeleven
- * @license http://wordpress.org/about/license
- */
-function picturesque_url_grabber() {
-	if ( ! preg_match( '/<a\s[^>]*?href=[\'"](.+?)[\'"]/is', get_the_content(), $matches ) )
-		return get_permalink( get_the_ID() );
-
-	return esc_url_raw( $matches[1] );
 }
 
 /**
