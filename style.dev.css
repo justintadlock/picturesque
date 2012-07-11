@@ -634,6 +634,11 @@ a.page-numbers:hover,
 
 /* Comments */
 
+.comments-closed {
+	font-style: italic;
+	color: #757575;
+}
+
 ol.comment-list,
 ol.comment-list ol.children {
 	list-style: none;
