@@ -27,7 +27,6 @@ get_header(); // Loads the header.php template. ?>
 			<?php $loop = new WP_Query(
 				array(
 					'posts_per_page' => ( 'layout-1c' == theme_layouts_get_layout() ? 10 : 6 ),
-					'nopaging' => true,
 					'tax_query' => array(
 						array(
 							'taxonomy' => 'post_format',
@@ -77,7 +76,6 @@ get_header(); // Loads the header.php template. ?>
 			<?php $loop = new WP_Query(
 				array(
 					'posts_per_page' => ( 'layout-1c' == theme_layouts_get_layout() ? 10 : 6 ),
-					'nopaging' => true,
 					'tax_query' => array(
 						array(
 							'taxonomy' => 'post_format',
