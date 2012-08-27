@@ -27,6 +27,17 @@ div.menu ul,nav.menu ul{margin:0;padding:0;list-style:none;line-height:1.0}div.m
 	font-style: normal;
 	}
 
+@font-face {
+	font-family: 'Yanone Kaffeesatz Bold';
+		src: url('fonts/yanone-kaffeesatz/yanonekaffeesatz-bold-webfont.eot');
+		src: url('fonts/yanone-kaffeesatz/yanonekaffeesatz-bold-webfont.eot?#iefix') format('embedded-opentype'),
+		url('fonts/yanone-kaffeesatz/yanonekaffeesatz-bold-webfont.woff') format('woff'),
+		url('fonts/yanone-kaffeesatz/yanonekaffeesatz-bold-webfont.ttf') format('truetype'),
+		url('fonts/yanone-kaffeesatz/yanonekaffeesatz-bold-webfont.svg#YanoneKaffeesatzBold') format('svg');
+	font-weight: normal;
+	font-style: normal;
+	}
+
 /* Layout */
 
 #menu-primary, 
@@ -82,8 +93,7 @@ a:hover {
 
 /* Headers */
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'Yanone Kaffeesatz', Arial, sans-serif;
-	font-weight: bold;
+	font-family: 'Yanone Kaffeesatz Bold', Arial, sans-serif;
 	}
 
 /* Quotes */
@@ -356,9 +366,8 @@ td {
 #site-title {
 	margin: 0;
 	line-height: 40px;
-	font-family: 'Yanone Kaffeesatz', Arial, sans-serif;
+	font-family: 'Yanone Kaffeesatz Bold', Arial, sans-serif;
 	font-size: 40px;
-	font-weight: bold;
 	text-shadow: 2px 2px #050505;
 	}
 #site-title a {
