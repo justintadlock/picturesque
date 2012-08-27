@@ -5,7 +5,7 @@
  * Lists comments and calls the comment form.  Individual comments have their own templates.  The 
  * hierarchy for these templates is $comment_type.php, comment.php.
  *
- * @package MyLife
+ * @package Picturesque
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>

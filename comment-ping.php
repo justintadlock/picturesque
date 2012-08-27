@@ -4,7 +4,7 @@
  *
  * The pingback comment template displays an individual pingback comment.
  *
- * @package MyLife
+ * @package Picturesque
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>

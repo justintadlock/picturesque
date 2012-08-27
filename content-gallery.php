@@ -4,7 +4,7 @@
  *
  * Template used to show posts with the 'gallery' post format.
  *
- * @package MyLife
+ * @package Picturesque
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>

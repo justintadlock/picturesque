@@ -4,7 +4,7 @@
  *
  * Template used to show post content when a more specific template cannot be found.
  *
- * @package MyLife
+ * @package Picturesque
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>

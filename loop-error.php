@@ -4,7 +4,7 @@
  *
  * Displays an error message when no posts are found.
  *
- * @package MyLife
+ * @package Picturesque
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>

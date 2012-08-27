@@ -5,7 +5,7 @@
  * This is the photoblogging template.  It displays a section with the latest images and a section with the 
  * latest galleries ('image' and 'gallery' post formats).
  *
- * @package MyLife
+ * @package Picturesque
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>

@@ -7,7 +7,7 @@
  * wrapper, which is opened with the header.php file. It also executes key functions needed
  * by the theme, child themes, and plugins. 
  *
- * @package MyLife
+ * @package Picturesque
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>

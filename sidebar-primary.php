@@ -5,7 +5,7 @@
  * Displays widgets for the Primary dynamic sidebar if any have been added to the sidebar through the 
  * widgets screen in the admin by the user.  Otherwise, nothing is displayed.
  *
- * @package MyLife
+ * @package Picturesque
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>

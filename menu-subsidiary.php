@@ -4,7 +4,7 @@
  *
  * Displays the Subsidiary Menu if it has active menu items.
  *
- * @package MyLife
+ * @package Picturesque
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>

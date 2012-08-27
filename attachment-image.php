@@ -5,7 +5,7 @@
  * This is the default attachment template.  It is used when visiting the singular view of a post attachment 
  * page (images, videos, audio, etc.).
  *
- * @package MyLife
+ * @package Picturesque
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>

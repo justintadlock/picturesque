@@ -5,7 +5,7 @@
  * Displays information at the top of the page about archive and search results when viewing those pages.  
  * This is not shown on the front page or singular views.
  *
- * @package MyLife
+ * @package Picturesque
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>

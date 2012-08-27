@@ -5,7 +5,7 @@
  * The search template is loaded when a visitor uses the search form to search for something
  * on the site.
  *
- * @package MyLife
+ * @package Picturesque
  * @subpackage Template
  * @since 0.1.0
  * @author Justin Tadlock <justin@justintadlock.com>
